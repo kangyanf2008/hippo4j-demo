@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    # 服务端创建的项目 id 需要与 application.name 保持一致
+    name: dynamic-threadpool-example
+  dynamic:
+    thread-pool:
+      default-executor:
+          core-pool-size: 1
+          maximum-pool-size: 1
+          execute-time-out: 1000
+      executors:
+        - thread-pool-id: message-produce
+        - thread-pool-id: message-consume
+      # 服务端地址
+      server-addr: http://192.168.5.20:6691
+      # 用户名
+      username: admin
+      # 密码
+      password: 123456
+      # 租户 id, 对应 tenant 表
+      namespace: prescription
+      # 项目 id, 对应 item 表
+      item-id: ${spring.application.name}
